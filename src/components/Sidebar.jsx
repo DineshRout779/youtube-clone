@@ -1,9 +1,11 @@
 import { Home } from '@mui/icons-material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import { useLayoutEffect, useState } from 'react';
+import { closeMenu, openMenu } from '../app/features/appSlice';
 
 const links = [
   {
@@ -39,6 +41,24 @@ const links = [
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((state) => state.app.isMenuOpen);
+  const dispatch = useDispatch();
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    if (screenWidth < 567) {
+      dispatch(closeMenu());
+    } else {
+      dispatch(openMenu());
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [screenWidth, dispatch]);
 
   if (!isMenuOpen) return null;
 

@@ -13,9 +13,9 @@ const Watch = () => {
   }, [dispatch]);
 
   return (
-    <div className='w-full flex container mx-auto py-4'>
+    <div className='md:flex container mx-auto w-[90%] py-4'>
       <iframe
-        className='basis-2/3 aspect-video rounded-md'
+        className='w-full md:basis-2/3 aspect-video rounded-md'
         src={`https://www.youtube.com/embed/${searchParams.get('v')}`}
         title='YouTube video player'
         allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
