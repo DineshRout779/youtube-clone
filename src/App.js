@@ -1,7 +1,15 @@
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+
 function App() {
   return (
-    <div className='App'>
-      <h1>Hello world</h1>
+    <div>
+      <Header />
+      <div className='flex w-full'>
+        <Sidebar />
+        <Outlet />
+      </div>
     </div>
   );
 }
